@@ -10,6 +10,11 @@ namespace AspNetCoreTodo.Controllers
     {
         public IActionResult Index()
         {
+            //从数据库获取todo项目
+
+            //把条目置于model中
+            
+            //使用model渲染视图
             return View();
         }
     }
