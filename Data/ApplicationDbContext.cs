@@ -6,11 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreTodo.Data
 {
+    using AspNetCoreTodo.Models;
+
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<TodoItem> Items { get; set; }
     }
 }

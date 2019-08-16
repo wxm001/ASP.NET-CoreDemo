@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCoreTodo
 {
+    using AspNetCoreTodo.Services;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -41,7 +43,13 @@ namespace AspNetCoreTodo
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            //----------------------------
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
+            //services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+            services.AddScoped<ITodoItemService, TodoItemService>();
+            //-----------------------------
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
